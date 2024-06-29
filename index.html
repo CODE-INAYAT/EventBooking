@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in & Sign up Form</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    #event {
+      background-color: transparent;
+      color: rgb(255, 255, 255);
+    }
+
+    #event option {
+      background-color: rgb(0, 0, 0);
+      color: rgb(127, 125, 125);
+    }
+
+    #event:focus option {
+      background-color: rgb(35, 35, 35);
+      color: white;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      backdrop-filter: blur(5px);
+    }
+
+    #overlay-content {
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .dotlottie-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-center {
+      text-align: center;
+    }
+
+    .loading-center svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 767px) {
+      #popup-modal {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(100% - 2rem);
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="box">
+      <div class="inner-box">
+        <div class="forms-wrap">
+          <form id="bookingForm" action="index.html" autocomplete="off" class="sign-in-form">
+            <div class="logo">
+              <img src="./img/logo.png" alt="easyclass" />
+              <h4>Event Registration</h4>
+            </div>
+
+            <div class="heading">
+              <h2>Welcome !</h2>
+            </div>
+
+            <div class="actual-form">
+              <div class="relative z-0 mb-10">
+                <input type="text" id="name" name="name" oninput="convertToUpperCaseAndRemoveNumbers(this)"
+                  class="block py-2.5 px-0 w-full text-base text-gray-100 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" " required />
+                <label for="name"
+                  class="absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-gray-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Full
+                  Name</label>
+              </div>
+
+              <div class="relative z-0 mb-10">
+                <input type="email" id="email" name="email"
+                  class="block py-2.5 px-0 w-full text-base text-gray-100 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" " required />
+                <label for="email"
+                  class="absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-gray-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Email</label>
+              </div>
+
+              <div class="relative z-0 mb-10">
+                <label for="event" class="sr-only">Underline select</label>
+                <select id="event" name="event"
+                  class="block py-2.5 px-0 w-full text-base text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option disabled selected>Select The Event</option>
+                  <option value="Event1">Event1</option>
+                  <option value="Event2">Event2</option>
+                  <option value="Event3">Event3</option>
+                  <option value="Event4">Event4</option>
+                </select>
+              </div>
+
+              <button type="submit" onclick="validateForm()"
+                class="sign-btn text-white font-medium bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Submit</button>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="carousel">
+          <div class="images-wrapper">
+            <img src="./img/1.jpg" class="image img-1 show" alt="" />
+            <img src="./img/3.jpg" class="image img-2" alt="" />
+            <img src="./img/2.jpg" class="image img-3" alt="" />
+          </div>
+
+          <div class="text-slider">
+            <div class="text-wrap">
+              <div class="text-group">
+                <h2>Discover, Decide and Enroll</h2>
+                <h2>Your Event Adventure Awaits!</h2>
+                <h2>Register with Ease...</h2>
+              </div>
+            </div>
+
+            <div class="bullets">
+              <span class="active" data-value="1"></span>
+              <span data-value="2"></span>
+              <span data-value="3"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--loading Modal-->
+    <div id="loadingModal" class="overlay" style="display: none;">
+      <div class="overlay-content">
+        <div class="relative bg-white rounded-lg shadow" style="border-radius: 30px;">
+          <div class="p-4 md:p-5 text-center">
+            <div class="loading-center">
+              <div role="status">
+                <!-- <svg aria-hidden="true"
+                                    class="w-8 h-8 text-gray-200 animate-spin fill-blue-600"
+                                    viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                        fill="currentFill" />
+                                </svg> -->
+                <span style="color: #540c69fc; height: 45px; width: 45px;"
+                  class="loading loading-dots loading-md"></span>
+                <h4 class="text-gray-700">Please Wait...</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-------------------- Success overlay ------------------------------->
+    <div id="successModal" class="overlay" style="display: none;">
+      <div id="overlay-content" class="overlay-content">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow" style="border-radius: 30px;">
+
+            <!---------showGreenTick()---------->
+            <div class="dotlottie-container" id="greenTick"
+              style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: none;">
+              <dotlottie-player src="https://lottie.host/b262bbf7-05a6-4a30-b6e3-648b52389ffe/o5joDCtkZz.json"
+                background="transparent" style="width: 80px; height: 80px;" autoplay></dotlottie-player>
+            </div>
+
+            <!---------showRedCross()---------->
+            <div class="dotlottie-container" id="redCross"
+              style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); display: none;">
+              <dotlottie-player src="https://lottie.host/e54f0c1b-5ffb-4b36-9d59-3ed5cd4e0a7f/65iSwXIjyM.json"
+                background="transparent" style="width: 50px; height: 50px;" autoplay></dotlottie-player>
+            </div>
+
+            <!-----------showError()---------------->
+            <div class="dotlottie-container" id="error"
+              style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); display: none;">
+              <img src="./img/error.png" width="55px" height="55px" alt="orange error icon" />
+            </div>
+
+            <div class="p-4 md:p-5 text-center">
+              <h3 id="modalTitle" style="padding-top: 20px;" class="mb-5 text-gray-800 text-2xl font-bold"></h3>
+              <p id="modalContent" class="mb-4 text-gray-800"></p>
+              <button data-modal-hide="popup-modal" type="button" onclick="closeModal()"
+                class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Javascript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+  <script src="app.js"></script>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const successModal = document.getElementById('successModal');
+    const loadingModal = document.getElementById('loadingModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxH1XbidVGQhtbwEq4CunSa3IFRgJnx_6K173FKqWiCpWSN4lNViz8BfjKQ0PTw5S7H/exec'; // Replace with your Apps Script web app URL
+
+    function showGreenTick() {
+      document.getElementById('greenTick').style.display = 'block';
+      document.getElementById('redCross').style.display = 'none';
+    }
+
+    function showRedCross() {
+      document.getElementById('greenTick').style.display = 'none';
+      document.getElementById('redCross').style.display = 'block';
+    }
+
+    function errorMessage() {
+      document.getElementById('greenTick').style.display = 'none';
+      document.getElementById('redCross').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    }
+
+
+    function showLoadingModal() {
+      loadingModal.style.display = 'flex';
+    }
+
+    function hideLoadingModal() {
+      loadingModal.style.display = 'none';
+    }
+
+    function closeModal() {
+      successModal.style.display = 'none';
+      document.getElementById('greenTick').style.display = 'none';
+      document.getElementById('redCross').style.display = 'none';
+      document.getElementById('error').style.display = 'none';
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      showLoadingModal();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const selectedEvent = document.getElementById('event').value;
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({
+          name: name,
+          email: email,
+          event: selectedEvent
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          hideLoadingModal();
+          if (data.status === 'success') {
+            showGreenTick();
+            modalTitle.innerHTML = 'Event Booked Successfully';
+            modalContent.innerHTML = `Thank you, ${name}! Your booking for ${selectedEvent} is confirmed with<br><span class="bg-blue-100 text-blue-800 me-2 px-1 py-0.5 rounded">Event ID: ${data.eventID}</span><br>Your serial number is: ${data.serialNumber}`;
+          } else {
+            showRedCross();
+            modalTitle.innerHTML = 'Booking Failed';
+            modalContent.innerHTML = data.message;
+          }
+          successModal.style.display = 'flex';
+        })
+        .catch(error => {
+          hideLoadingModal();
+          console.error('Error!', error.message);
+          errorMessage();
+          modalTitle.innerHTML = 'Error';
+          modalContent.innerHTML = 'An error occurred. Please try again later.';
+          successModal.style.display = 'flex';
+        });
+    });
+
+    //Convert full name to uppercase
+    function convertToUpperCaseAndRemoveNumbers(input) {
+      input.value = input.value.replace(/[0-9]/g, '').toUpperCase();
+    }
+
+    //Check for the event is selected
+    function validateForm() {
+      var eventValue = document.getElementById("event").value;
+      if (eventValue === "Select The Event") {
+        alert("Please Select The Event");
+      }
+    }
+  </script>
+</body>
+
+</html>
